@@ -1,0 +1,15 @@
+#content-container {position: absolute; top: 20px; left: 50px; width: 700px; height: 540px; background-color: #efefef; clear: both; cursor: crosshair;}
+#score {float: left; opacity: 0;}
+#home {float: right;}
+
+a:link { text-decoration: none; color: #fff; }
+a:visited { text-decoration: none; color: #fff; }
+a:hover { text-decoration: none; color: #fff; }
+a:active { text-decoration: none; color: #fff; }
+
+html, body { margin: 0; padding: 0; cursor: crosshair;}
+body { font-family: Arial, Helvetica, Verdana, Sans-serif; font-size: 12px; background: #ffffff; cursor: pointer; overflow: auto;}
+
+.start {text-align: center; font-family: Arial, Helvetica, Verdana, Sans-serif; font-size: 20px; opacity: 0;}
+.shot {background-color: #ff3333; height: 10px; width: 3px; position: absolute; padding: 0px;}
+.dashboard { left: 50px; position: absolute; width: 700px; height: 15px; background-color: #000000; color: #fff; font-size: 10px; z-index: 100; top: 2px; }

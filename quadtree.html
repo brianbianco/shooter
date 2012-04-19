@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+	<title>Quadtree</title>
+	<meta http-equiv="Content-Language" content="en-us" />
+	
+	<meta http-equiv="imagetoolbar" content="no" />
+	<meta name="MSSmartTagsPreventParsing" content="true" />
+	
+	<meta name="description" content="a jquery quadtree implementation" />
+	<meta name="keywords" content="quadtree, css, jquery" />
+
+	
+	<meta name="author" content="Brian Bianco" />
+	
+	<style type="text/css" media="all">@import "css/qt.css";</style>
+    <script type="text/javascript" src="js/jquery-1.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.color.js"></script>
+    <script type="text/javascript" src="js/qt.js"></script>
+    <script type="text/javascript" src="js/qiMath.js"></script>     
+    
+    <script type="text/javascript">
+
+	function drawBox(cObject,leftOffset,topOffset)
+	{
+		var currentBox = $('<div></div>');
+ 		currentBox.addClass('bounding');
+            	currentBox.css({
+            	'width' : cObject.width + 'px',
+            	'height' : cObject.height + 'px',
+            	'background-color' : '#ffcc00',
+            	'position' : 'absolute',
+            	'top' : (topOffset + cObject.y) + 'px', 
+            	'left' : (leftOffset + cObject.x) + 'px',
+            	'border-style' : 'solid',
+            	'border-width' : '1px',
+    			'z-index': '99'
+    			});	
+		$('body').append(currentBox);
+    }
+    
+    function drawBounds(node,leftOffset,topOffset)
+    {
+        	var bounds = node.bounds;
+        	var bgcolor = node.childCount ? '#fff' : '#c9e3b2';
+        	
+    		var currentBounds = $('<div></div>');
+            currentBounds.addClass('bounding');
+    		currentBounds.css({
+            	'width' : (bounds.width - 1) + 'px',
+            	'height' : (bounds.height - 1) + 'px',
+            	'background-color' : bgcolor,
+            	'position' : 'absolute',
+            	'top' : (topOffset + bounds.y) + 'px', 
+            	'left' : (leftOffset + bounds.x) + 'px',
+            	'border-style' : 'solid',
+            	'border-width' : '1px',
+            	'opacity' : '1',
+    			});	
+            	$('body').append(currentBounds);
+    }
+
+    function generateRandomTree()
+    {
+    	$('.bounding').remove();
+		var root = new node(new box(0,0,500,500));
+		var objectCount = 20;
+		root.reset;
+    	for(var i=0;i<objectCount;i++)
+    	{
+    		root.insertObject(new box(Math.floor(Math.random()*475),Math.floor(Math.random()*475),25,25));
+    	}
+
+    	//root.search(objectCallback, nodeCallback, new box(180,180,40,40));
+    	root.search(objectCallback, nodeCallback);
+    }
+
+    function objectCallback(cObject)
+    {
+    	drawBox(cObject,0,10); 
+    }
+
+    function nodeCallback(cNode)
+    {
+    	drawBounds(cNode, 0,10); 
+    }
+    
+    
+	$(document).ready(function(e)
+	{	  
+		$(document).bind('click',function(e)
+		{
+			generateRandomTree(); 				 
+		});
+    });
+    </script>
+</head>
+<html>
+<body>
+<div id='header'>click your mouse to spawn new trees!</div>
+<a id='footer' href="http://brianbianco.com">brianbianco.com</a>
+</body>
+</html>
+
+
